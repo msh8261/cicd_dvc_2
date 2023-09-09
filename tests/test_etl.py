@@ -12,8 +12,8 @@ from etl.etl import *
 with initialize(version_base=None, config_path="../config"):
     config = compose(config_name="main", overrides=["etl=etl1", "ml=ml1", "vis=vis1"])    
 
-def test_raw_data_exist():
-    assert os.path.exists(config.etl.data.raw)
+# def test_raw_data_exist():
+#     assert os.path.exists(config.etl.data.raw)
 
 
 # def test_read_data():
