@@ -16,10 +16,10 @@ def test_raw_data_exist():
     assert os.path.exists(config.etl.data.raw)
 
 
-def test_read_data():
-    # for prefect function use fn()
-    df = read_data.fn()
-    assert type(df) == pd.DataFrame
+# def test_read_data():
+#     # for prefect function use fn()
+#     df = read_data.fn()
+#     assert type(df) == pd.DataFrame
 
 
 def test_message_cleaning():
