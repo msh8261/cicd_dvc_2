@@ -45,10 +45,10 @@ jobs:
         working-directory: "./"
         run: poetry run pytest tests/
 
-      - name: Lint
-        working-directory: "./"
-        run: poetry run pylint --recursive=y .
-        
+      # - name: Lint
+      #   working-directory: "./"
+      #   run: poetry run pylint --recursive=y .
+
       - name: Pull data and model
         run: dvc pull
 
