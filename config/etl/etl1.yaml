@@ -1,0 +1,37 @@
+data:
+  raw: data/raw/amazon_alexa.tsv
+  dst: data/dst 
+  train: 
+    x: data/dst/Xtrain.csv
+    y: data/dst/ytrain.csv
+  test: 
+    x: data/dst/Xtest.csv
+    y: data/dst/ytest.csv
+
+
+test_size: 0.2
+target: 'feedback'
+drop1: 'verified_reviews'
+drop2: 'date'
+drop3: 'variation'
+stop_words: 'english'
+
+bucket_name: bucket1-aws-2023
+s3_file_name_1: xtrain
+s3_file_name_2: ytrain
+s3_file_name_3: xtest
+s3_file_name_4: ytest
+
+
+
+
+
+
+
+
+
+
+
+
+
+

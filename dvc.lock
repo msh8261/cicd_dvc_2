@@ -1,0 +1,51 @@
+schema: '2.0'
+stages:
+  etl:
+    cmd: python etl/etl.py
+    deps:
+    - path: data/raw/amazon_alexa.tsv
+      hash: md5
+      md5: 2ce1e90c5614728cf808101f222eccaf
+      size: 514752
+    - path: etl/etl.py
+      hash: md5
+      md5: 391fe7c57d7e1864a2e1336c67ff3819
+      size: 4125
+  train:
+    cmd: python ml/train.py
+    deps:
+    - path: data/dst
+      hash: md5
+      md5: ecb73379006eaf447c6dd019023ffd48.dir
+      size: 32933721
+      nfiles: 4
+    - path: ml/train.py
+      hash: md5
+      md5: ba8f84fca7b08b23aad08c3c6e900425
+      size: 2760
+  evaluate:
+    cmd: python ml/evaluate.py
+    deps:
+    - path: data/dst
+      hash: md5
+      md5: ecb73379006eaf447c6dd019023ffd48.dir
+      size: 32933721
+      nfiles: 4
+    - path: ml/evaluate.py
+      hash: md5
+      md5: 3407cbdb5c3e8401361fe79dddb2e34b
+      size: 2043
+    - path: model
+      hash: md5
+      md5: f14fa07c4848416132d039ac8d657566.dir
+      size: 94693296
+      nfiles: 1
+    outs:
+    - path: dvclive/metrics.json
+      hash: md5
+      md5: b38d6f9cce7d9797da7ab954e671d357
+      size: 43
+  monitoring:
+    cmd: python vis/monitoring.py
+  test:
+    cmd: poetry run pytest tests/

@@ -1,0 +1,5 @@
+outs:
+- md5: 2ce1e90c5614728cf808101f222eccaf
+  size: 514752
+  hash: md5
+  path: amazon_alexa.tsv

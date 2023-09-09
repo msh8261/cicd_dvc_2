@@ -1,0 +1,73 @@
+name: ci-tests
+on: 
+  push:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - etl/**
+      - ml/**
+      - s3/**
+      - tests/**
+      - github/workflows/ci_test.yaml
+
+env:
+  AWS_DEFAULT_REGION: 'eu-north-1'
+  AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+  AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+
+jobs:
+  test_model:
+    name: Test processed code and model
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 
+        id: checkout
+        uses: actions/checkout@v3
+
+      - name: Environment setup
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.11
+     
+      - name: Install dependencies
+        working-directory: "./"
+        run: pip install poetry && poetry install
+        
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{env.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{env.AWS_SECRET_ACCESS_KEY}}
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+
+      - name: Pull data and model
+        run: dvc pull
+
+      - name: Evaluate model
+        run: dvc exp run evaluate
+      
+      - name: Run Unit tests
+        working-directory: "./"
+        run: poetry run pytest tests/
+
+      - name: Lint
+        working-directory: "./"
+        run: poetry run pylint --recursive=y .
+
+      - name: Iterative CML setup
+        uses: iterative/setup-cml@v1
+    
+      - name: Create CML report
+        env:
+          REPO_TOKEN: ${{secrets.SECRET_TOKEN}}
+        run: |
+          # Add the metrics to the report
+          dvc metrics show --show-md >> report.md
+          # Add the parameters to the report
+          cat dvclive/params.yaml >> report.md
+          # Create a report in PR
+          cml comment create report.md 
+
+
+

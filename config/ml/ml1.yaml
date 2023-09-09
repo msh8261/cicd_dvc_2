@@ -1,0 +1,26 @@
+model:
+  name: nbm_sentiment_analysis.pkl
+  path: model/
+  hyperparameters:
+    svc__C:
+    - 0.1
+    - 1
+    - 10
+    svc__gamma:
+    - 0.1
+    - 1
+    - 10
+  grid_search:
+    cv: 5
+    scoring: accuracy
+    verbose: 3
+
+
+# Set the values
+bucket_name: bucket1-aws-2023
+key_1: xtrain
+key_2: ytrain
+key_3: xtest
+key_4: ytest
+
+s3_model_name: nbm_sentiment_analysis

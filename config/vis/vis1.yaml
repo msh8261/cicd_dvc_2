@@ -1,0 +1,14 @@
+
+DATA_COLUMNS:  {
+    'target': 'feedback',
+    'prediction': 'feedback',    
+    # categorical features
+    'cat_features': ['variation', 'date', 'verified_reviews'], 
+    # numerical features
+    'num_features': ['']
+}
+
+REPORTS_DIR: reports
+
+REPORT_NAME: model_monitoring_report.html
+

@@ -1,0 +1,31 @@
+stages:
+  etl:
+    cmd: python etl/etl.py
+    deps:
+      - data/raw/amazon_alexa.tsv
+      - etl/etl.py
+  train:
+    cmd: python ml/train.py
+    deps:
+      - data/dst
+      - ml/train.py
+  evaluate:
+    cmd: python ml/evaluate.py
+    deps:
+      - model
+      - data/dst
+      - ml/evaluate.py
+    metrics:
+      - dvclive/metrics.json
+  monitoring:
+    cmd: python vis/monitoring.py
+  test:
+    cmd: poetry run pytest tests/
+
+
+
+
+
+
+
+
