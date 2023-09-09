@@ -41,12 +41,6 @@ jobs:
           aws-secret-access-key: ${{env.AWS_SECRET_ACCESS_KEY}}
           aws-region: ${{ env.AWS_DEFAULT_REGION }}
 
-      - name: Pull data and model
-        run: dvc pull
-
-      - name: Evaluate model
-        run: dvc exp run evaluate
-      
       - name: Run Unit tests
         working-directory: "./"
         run: poetry run pytest tests/
@@ -54,7 +48,13 @@ jobs:
       - name: Lint
         working-directory: "./"
         run: poetry run pylint --recursive=y .
+        
+      - name: Pull data and model
+        run: dvc pull
 
+      - name: Evaluate model
+        run: dvc exp run evaluate
+      
       - name: Iterative CML setup
         uses: iterative/setup-cml@v1
     
