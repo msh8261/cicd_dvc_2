@@ -6,7 +6,7 @@ data:
     y: data/dst/ytrain.csv
   test: 
     x: data/dst/Xtest.csv
-    y: data/dst/ytest.csv
+    y: data/dst/ytest.csv 
 
 
 test_size: 0.2
