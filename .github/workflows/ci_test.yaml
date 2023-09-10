@@ -31,23 +31,36 @@ jobs:
         with:
           python-version: 3.11
      
-      - name: Install poetry
-        run: |
-          python -m pip install poetry==1.6.1
-
-      - name: Configure poetry
-        run: |
-          python -m poetry config virtualenvs.in-project true
-
-      - name: Cache the virtualenv
-        uses: actions/cache@v2
+     #----------------------------------------------
+      #  -----  install & configure poetry  -----
+      #----------------------------------------------
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
         with:
-          path: ./.venv
-          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
 
+      #----------------------------------------------
+      #       load cached venv if cache exists
+      #----------------------------------------------
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      #----------------------------------------------
+      # install dependencies if cache does not exist
+      #----------------------------------------------
       - name: Install dependencies
-        run: |
-          python -m poetry install
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction --no-root
+      #----------------------------------------------
+      # install your root project, if required
+      #----------------------------------------------
+      - name: Install project
+        run: poetry install --no-interaction
         
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -58,11 +71,11 @@ jobs:
 
       - name: Run Unit tests
         working-directory: "./"
-        run: python -m poetry run pytest tests/
+        run: poetry run pytest tests/
 
       # - name: Lint
       #   working-directory: "./"
-      #   run: python -m poetry run pylint --recursive=y .
+      #   run: poetry run pylint --recursive=y .
 
       # - name: Pull data and 
       #   run: dvc pull
@@ -72,7 +85,7 @@ jobs:
 
       - name: Evaluate model
         working-directory: "./"
-        run: python -m poetry run python ml/evaluate.py
+        run: poetry run python ml/evaluate.py
 
       - name: Iterative CML setup
         uses: iterative/setup-cml@v1
