@@ -56,7 +56,7 @@ jobs:
       #   run: dvc exp run evaluate
 
       - name: Evaluate model
-        run: poetry run python ml/evaluate.py
+        run: python ml/evaluate.py
 
       - name: Iterative CML setup
         uses: iterative/setup-cml@v1
