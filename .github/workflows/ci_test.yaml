@@ -31,9 +31,23 @@ jobs:
         with:
           python-version: 3.11
      
+      - name: Install poetry
+        run: |
+          python -m pip install poetry==1.6.1
+
+      - name: Configure poetry
+        run: |
+          python -m poetry config virtualenvs.in-project true
+
+      - name: Cache the virtualenv
+        uses: actions/cache@v2
+        with:
+          path: ./.venv
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
+
       - name: Install dependencies
-        working-directory: "./"
-        run: pip install poetry && poetry install
+        run: |
+          python -m poetry install
         
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -44,11 +58,11 @@ jobs:
 
       - name: Run Unit tests
         working-directory: "./"
-        run: poetry run pytest tests/
+        run: python -m poetry run pytest tests/
 
       # - name: Lint
       #   working-directory: "./"
-      #   run: poetry run pylint --recursive=y .
+      #   run: python -m poetry run pylint --recursive=y .
 
       # - name: Pull data and 
       #   run: dvc pull
@@ -57,7 +71,7 @@ jobs:
       #   run: dvc exp run evaluate
 
       - name: Evaluate model
-        run: poetry run python ml/evaluate.py
+        run: python -m poetry run python ml/evaluate.py
 
       - name: Iterative CML setup
         uses: iterative/setup-cml@v1
