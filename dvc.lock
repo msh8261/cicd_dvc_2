@@ -9,8 +9,8 @@ stages:
       size: 514752
     - path: etl/etl.py
       hash: md5
-      md5: 391fe7c57d7e1864a2e1336c67ff3819
-      size: 4125
+      md5: 0606795353695ffa3e6ac5b1ce63a7a1
+      size: 4133
   train:
     cmd: python ml/train.py
     deps:
@@ -21,25 +21,15 @@ stages:
       nfiles: 4
     - path: ml/train.py
       hash: md5
-      md5: ba8f84fca7b08b23aad08c3c6e900425
-      size: 2760
+      md5: dd6228b65035e8b5c4d2ebc45f7af9e0
+      size: 2767
   evaluate:
     cmd: python ml/evaluate.py
     deps:
-    - path: data/dst
-      hash: md5
-      md5: ecb73379006eaf447c6dd019023ffd48.dir
-      size: 32933721
-      nfiles: 4
     - path: ml/evaluate.py
       hash: md5
-      md5: 3407cbdb5c3e8401361fe79dddb2e34b
-      size: 2043
-    - path: model
-      hash: md5
-      md5: f14fa07c4848416132d039ac8d657566.dir
-      size: 94693296
-      nfiles: 1
+      md5: 1bf7c6011c9b4b021e1aa39e77a0686d
+      size: 2074
     outs:
     - path: dvclive/metrics.json
       hash: md5

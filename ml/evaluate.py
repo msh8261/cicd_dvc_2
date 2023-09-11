@@ -56,7 +56,6 @@ def main() -> None:
         X_test, y_test= load_data()
         model = load_model()
         y_pred = model.predict(X_test)
-        # y_pred = np.argmax(y_pred, axis=1)
         y_test = np.argmax(y_test,axis=1)
         # Get metrics
         accuracy = accuracy_score(y_test, y_pred)
