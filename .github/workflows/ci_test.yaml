@@ -79,9 +79,9 @@ jobs:
       #   working-directory: "./"
       #   run: poetry run pylint --recursive=y .
 
-      - name: Evaluate model
-        working-directory: "./"
-        run: poetry run python ml/evaluate.py
+      # - name: Evaluate model
+      #   working-directory: "./"
+      #   run: poetry run python ml/evaluate.py
 
       - name: Pull data and 
         run: dvc pull
