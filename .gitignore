@@ -8,6 +8,7 @@ __pycache__/
 
 test-copy/
 outputs/
+model/
 
 # Distribution / packaging
 .Python

@@ -36,3 +36,8 @@ def upload_to_aws(local_file, bucket, s3_file):
     except NoCredentialsError:
         print("Credentials not available")
         return False
+
+
+if __name__ == "__main__":
+    df = read_s3_file('bucket1-aws-2023', 'xtrain')
+    print(df)
