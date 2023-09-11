@@ -8,9 +8,10 @@ stages:
     cmd: python ml/train.py
     deps:
       - data/dst
+      - model
       - ml/train.py
-    outs:
-      - model/nbm_sentiment_analysis.pkl
+    # outs:
+    #   - model/nbm_sentiment_analysis.pkl
   evaluate:
     cmd: python ml/evaluate.py
     deps:

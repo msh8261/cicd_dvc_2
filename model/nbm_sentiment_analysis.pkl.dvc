@@ -1,0 +1,5 @@
+outs:
+- md5: 812784151a637f79b6c37489e36ea5fa
+  size: 95444472
+  hash: md5
+  path: nbm_sentiment_analysis.pkl

@@ -23,10 +23,9 @@ stages:
       hash: md5
       md5: 543831b7959ff9a576c8b957c76fd34e
       size: 2777
-    outs:
     - path: model/nbm_sentiment_analysis.pkl
       hash: md5
-      md5: 812784151a637f79b6c37489e36ea5fa
+      md5: 6e8eeb3bb92ea438b2ea558a6ad2f0d8
       size: 95444472
   evaluate:
     cmd: python ml/evaluate.py
@@ -42,9 +41,9 @@ stages:
       size: 2041
     - path: model
       hash: md5
-      md5: df3891fb52471b738e262f9c8e5b4810.dir
-      size: 95444472
-      nfiles: 1
+      md5: e958dd4d32c5eb6351c7947656cc1eaf.dir
+      size: 95444595
+      nfiles: 3
     outs:
     - path: dvclive/metrics.json
       hash: md5
@@ -60,9 +59,9 @@ stages:
       nfiles: 9
     - path: model
       hash: md5
-      md5: df3891fb52471b738e262f9c8e5b4810.dir
-      size: 95444472
-      nfiles: 1
+      md5: e958dd4d32c5eb6351c7947656cc1eaf.dir
+      size: 95444595
+      nfiles: 3
     - path: vis/monitoring.py
       hash: md5
       md5: e55b6409258857ce973608483f7285f7

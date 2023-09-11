@@ -57,7 +57,7 @@ jobs:
         env:
           access-key-id: ${{env.AWS_ACCESS_KEY_ID}}
           secret-access-key: ${{env.AWS_SECRET_ACCESS_KEY}}
-        run: pipenv run dvc repro
+        run: pipenv run dvc exp run evaluate
 
       - name: Iterative CML setup
         uses: iterative/setup-cml@v1
@@ -72,7 +72,7 @@ jobs:
           cat dvclive/params.yaml >> report.md
           # Create a report in PR
           cml comment create report.md 
-          
+
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
