@@ -21,6 +21,9 @@ jobs:
   test_model:
     name: Test processed code and model
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./
     steps:
       #----------------------------------------------
       #       check-out repo and set-up python
