@@ -1,0 +1,4 @@
+Best hyperparameters:
+  svc__C: 1
+  svc__gamma: 1
+  svc__kernel: rbf

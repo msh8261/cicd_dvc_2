@@ -69,7 +69,7 @@ jobs:
           # Add the metrics to the report
           pipenv run dvc metrics show --md >> report.md
           # Add the parameters to the report
-          ## cat dvclive/params.yaml >> report.md
+          cat dvclive/params.yaml >> report.md
           # Create a report in PR
           cml comment create report.md 
 
