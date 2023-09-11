@@ -67,7 +67,7 @@ jobs:
           REPO_TOKEN: ${{secrets.SECRET_TOKEN}}
         run: |
           # Add the metrics to the report
-          dvc metrics show --show-md >> report.md
+          pipenv run dvc metrics show --show-md >> report.md
           # Add the parameters to the report
           cat dvclive/params.yaml >> report.md
           # Create a report in PR
