@@ -21,7 +21,7 @@ from omegaconf import DictConfig
 from prefect import flow, task
 from prefect.task_runners import SequentialTaskRunner
 
-from s3.s3_bucket import read_s3_file, upload_to_aws
+# from s3.s3_bucket import read_s3_file, upload_to_aws
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -54,12 +54,12 @@ def load_data() -> pd.DataFrame:
 @task
 def load_model():
     # Load model
-    model_file = read_s3_file(config.ml.bucket_name, 'nbm_sentiment_analysis')
-    model = joblib.load(model_file)
-    # model_name = config.ml.model.name
-    # dir_m = config.ml.model.path
-    # local_file = os.path.join(dir_m, model_name)
-    # model = joblib.load(abspath(local_file))
+    # model_file = read_s3_file(config.ml.bucket_name, 'nbm_sentiment_analysis')
+    # model = joblib.load(model_file)
+    model_name = config.ml.model.name
+    dir_m = config.ml.model.path
+    local_file = os.path.join(dir_m, model_name)
+    model = joblib.load(local_file)
     return model
 
 

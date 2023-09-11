@@ -7,8 +7,6 @@ __pycache__/
 *.so
 
 test-copy/
-model/
-reports/
 outputs/
 
 # Distribution / packaging

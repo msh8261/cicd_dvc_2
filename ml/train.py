@@ -17,7 +17,7 @@ from omegaconf import DictConfig
 from prefect import task, flow, get_run_logger
 from prefect.task_runners import SequentialTaskRunner
 
-from store.read_write_s3 import read_s3_file, upload_to_aws
+# from store.read_write_s3 import read_s3_file, upload_to_aws
 
 
 with initialize(version_base=None, config_path="../config"):
@@ -61,12 +61,12 @@ def train(config, X_train, y_train) -> None:
 # @hydra.main(version_base=None, config_path="../config", config_name="main")
 @flow(task_runner=SequentialTaskRunner())
 def main():
-    df_x = read_s3_file(config.ml.bucket_name, 'xtrain')
-    X_train = pd.read_csv(df_x)
-    df_y = read_s3_file(config.ml.bucket_name, 'ytrain')
-    y_train = pd.read_csv(df_y)
-    # X_train = pd.read_csv(config.etl.data.train.x)
-    # y_train = pd.read_csv(config.etl.data.train.y)
+    # df_x = read_s3_file(config.ml.bucket_name, 'xtrain')
+    # X_train = pd.read_csv(df_x)
+    # df_y = read_s3_file(config.ml.bucket_name, 'ytrain')
+    # y_train = pd.read_csv(df_y)
+    X_train = pd.read_csv(config.etl.data.train.x)
+    y_train = pd.read_csv(config.etl.data.train.y)
     grid_search = train(config, X_train, y_train['feedback'])
     # save model
     model_name = config.ml.model.name
@@ -75,8 +75,8 @@ def main():
     local_file = os.path.join(dir_m, model_name)
     with open(local_file, 'wb') as fout:
         pickle.dump(grid_search, fout)   
-    uploaded_model = upload_to_aws(local_file, config.ml.bucket_name, config.ml.s3_model_name)
-    print(f'file uploaded: {uploaded_model}')
+    # uploaded_model = upload_to_aws(local_file, config.ml.bucket_name, config.ml.s3_model_name)
+    # print(f'file uploaded: {uploaded_model}')
 
 
 

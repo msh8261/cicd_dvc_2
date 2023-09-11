@@ -15,7 +15,7 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, f1_score
 from typing import Tuple
 
-from store.read_write_s3  import read_s3_file, upload_to_aws
+# from utils.read_write_s3  import read_s3_file, upload_to_aws
 
  
 with initialize(version_base=None, config_path="../config"):
@@ -27,24 +27,23 @@ with initialize(version_base=None, config_path="../config"):
 @task
 def load_data()-> Tuple: 
     # Load data
-    df_x = read_s3_file(config.ml.bucket_name, 'xtest')
-    X_test = pd.read_csv(df_x)
-    df_y = read_s3_file(config.ml.bucket_name, 'ytest')
-    y_test = pd.read_csv(df_y)
-    # X_test = pd.read_pickle(abspath(config.etl.data.test.x))
-    # y_test = pd.read_pickle(abspath(config.etl.data.test.y))
+    # df_x = read_s3_file(config.ml.bucket_name, 'xtest')
+    # X_test = pd.read_csv(df_x)
+    # df_y = read_s3_file(config.ml.bucket_name, 'ytest')
+    # y_test = pd.read_csv(df_y)
+    X_test = pd.read_csv(config.etl.data.test.x)
+    y_test = pd.read_csv(config.etl.data.test.y)
     return X_test, y_test
-
 
 @task
 def load_model():
     # Load model
-    model_File = read_s3_file(config.ml.bucket_name, 'nbm_sentiment_analysis')
-    model = joblib.load(model_File)
-    # model_name = config.ml.model.name
-    # dir_m = config.ml.model.path
-    # local_file = os.path.join(dir_m, model_name)
-    # model = joblib.load(abspath(local_file))
+    # model_File = read_s3_file(config.ml.bucket_name, 'nbm_sentiment_analysis')
+    # model = joblib.load(model_File)
+    model_name = config.ml.model.name
+    dir_m = config.ml.model.path
+    local_file = os.path.join(dir_m, model_name)
+    model = joblib.load(local_file)
     return model
 
 

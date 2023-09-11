@@ -20,7 +20,7 @@ nltk.download('stopwords')
 # You have to download stopwords Package to execute this command
 from nltk.corpus import stopwords
 
-from store.read_write_s3  import read_s3_file, upload_to_aws
+# from store.read_write_s3  import read_s3_file, upload_to_aws
 
 with initialize(version_base=None, config_path="../config"):
     config = compose(config_name="main", overrides=["etl=etl1"])    
@@ -82,17 +82,17 @@ def load_data(df_x: pd.DataFrame, df_y: pd.Series):
     X_test.to_csv(config.etl.data.test.x)
     y_test.to_csv(config.etl.data.test.y)
 
-    local_file_1 = config.etl.data.train.x
-    local_file_2 = config.etl.data.train.y
-    local_file_3 = config.etl.data.test.x
-    local_file_4 = config.etl.data.test.y
+    # local_file_1 = config.etl.data.train.x
+    # local_file_2 = config.etl.data.train.y
+    # local_file_3 = config.etl.data.test.x
+    # local_file_4 = config.etl.data.test.y
 
-    uploaded_1 = upload_to_aws(local_file_1, config.etl.bucket_name, config.etl.s3_file_name_1)
-    uploaded_2 = upload_to_aws(local_file_2, config.etl.bucket_name, config.etl.s3_file_name_2)
-    uploaded_3 = upload_to_aws(local_file_3, config.etl.bucket_name, config.etl.s3_file_name_3)
-    uploaded_4 = upload_to_aws(local_file_4, config.etl.bucket_name, config.etl.s3_file_name_4)
-    print(f'file uploaded: {uploaded_1}, file2: {uploaded_2}, file3: {uploaded_3}, file4: {uploaded_4}')
-    print("Data loaded to a data lake!")
+    # uploaded_1 = upload_to_aws(local_file_1, config.etl.bucket_name, config.etl.s3_file_name_1)
+    # uploaded_2 = upload_to_aws(local_file_2, config.etl.bucket_name, config.etl.s3_file_name_2)
+    # uploaded_3 = upload_to_aws(local_file_3, config.etl.bucket_name, config.etl.s3_file_name_3)
+    # uploaded_4 = upload_to_aws(local_file_4, config.etl.bucket_name, config.etl.s3_file_name_4)
+    # print(f'file uploaded: {uploaded_1}, file2: {uploaded_2}, file3: {uploaded_3}, file4: {uploaded_4}')
+    # print("Data loaded to a data lake!")
 
 
 # @hydra.main(version_base=None, config_path='config', config_name='main')

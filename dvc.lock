@@ -9,33 +9,63 @@ stages:
       size: 514752
     - path: etl/etl.py
       hash: md5
-      md5: 0606795353695ffa3e6ac5b1ce63a7a1
-      size: 4133
+      md5: 1b48913c0af71016c5867abbb7535ecf
+      size: 4263
   train:
     cmd: python ml/train.py
     deps:
     - path: data/dst
       hash: md5
-      md5: ecb73379006eaf447c6dd019023ffd48.dir
-      size: 32933721
-      nfiles: 4
+      md5: 44314a42881d0fb8a26f494661b97d04.dir
+      size: 32934157
+      nfiles: 9
     - path: ml/train.py
       hash: md5
-      md5: dd6228b65035e8b5c4d2ebc45f7af9e0
-      size: 2767
+      md5: 543831b7959ff9a576c8b957c76fd34e
+      size: 2777
+    outs:
+    - path: model/nbm_sentiment_analysis.pkl
+      hash: md5
+      md5: 812784151a637f79b6c37489e36ea5fa
+      size: 95444472
   evaluate:
     cmd: python ml/evaluate.py
     deps:
+    - path: data/dst
+      hash: md5
+      md5: 44314a42881d0fb8a26f494661b97d04.dir
+      size: 32934157
+      nfiles: 9
     - path: ml/evaluate.py
       hash: md5
-      md5: 1bf7c6011c9b4b021e1aa39e77a0686d
-      size: 2074
+      md5: 29ad3a640f11ba3d350fba567bd3d250
+      size: 2041
+    - path: model
+      hash: md5
+      md5: df3891fb52471b738e262f9c8e5b4810.dir
+      size: 95444472
+      nfiles: 1
     outs:
     - path: dvclive/metrics.json
       hash: md5
-      md5: b38d6f9cce7d9797da7ab954e671d357
+      md5: 7ebd61e02f6d68913d2e5029b9ee03d7
       size: 43
   monitoring:
     cmd: python vis/monitoring.py
+    deps:
+    - path: data/dst
+      hash: md5
+      md5: 44314a42881d0fb8a26f494661b97d04.dir
+      size: 32934157
+      nfiles: 9
+    - path: model
+      hash: md5
+      md5: df3891fb52471b738e262f9c8e5b4810.dir
+      size: 95444472
+      nfiles: 1
+    - path: vis/monitoring.py
+      hash: md5
+      md5: e55b6409258857ce973608483f7285f7
+      size: 5651
   test:
-    cmd: poetry run pytest tests/
+    cmd: pipenv run pytest tests/

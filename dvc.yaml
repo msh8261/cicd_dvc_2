@@ -9,14 +9,22 @@ stages:
     deps:
       - data/dst
       - ml/train.py
+    outs:
+      - model/nbm_sentiment_analysis.pkl
   evaluate:
     cmd: python ml/evaluate.py
     deps:
+      - model
+      - data/dst 
       - ml/evaluate.py
     metrics:
       - dvclive/metrics.json
   monitoring:
     cmd: python vis/monitoring.py
+    deps:
+      - model
+      - data/dst 
+      - vis/monitoring.py
   test:
     cmd: pipenv run pytest tests/
 

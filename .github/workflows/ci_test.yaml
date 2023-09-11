@@ -6,11 +6,10 @@ on:
       - main
     paths:
       - ./**
-      - etl/**
-      - ml/**
-      - store/**
-      - tests/**
-      - github/workflows/ci_test.yaml
+      # - etl/**
+      # - ml/**
+      # - tests/**
+      # - github/workflows/ci_test.yaml
 
 env:
   AWS_DEFAULT_REGION: 'eu-north-1'
@@ -94,6 +93,12 @@ jobs:
           cat dvclive/params.yaml >> report.md
           # Create a report in PR
           cml comment create report.md 
+
+
+
+
+
+          
 
 
 
