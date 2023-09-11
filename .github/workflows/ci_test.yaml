@@ -8,7 +8,7 @@ on:
       - ./**
       - etl/**
       - ml/**
-      - cl/**
+      - store/**
       - tests/**
       - github/workflows/ci_test.yaml
 

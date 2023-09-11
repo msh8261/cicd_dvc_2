@@ -15,7 +15,7 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, f1_score
 from typing import Tuple
 
-from cl.s3_bucket import read_s3_file, upload_to_aws
+from store.read_write_s3  import read_s3_file, upload_to_aws
 
  
 with initialize(version_base=None, config_path="../config"):
