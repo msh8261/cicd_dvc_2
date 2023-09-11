@@ -61,7 +61,7 @@ dvc-render = "==0.5.3"
 dvc-s3 = "==2.23.0"
 dvc-studio-client = "==0.15.0"
 dvc-task = "==0.3.0"
-dvc = {version = "==3.19.0", extras = ["s3"]}
+dvc = {extras = ["s3"], version = "*"}
 dvclive = "==2.16.0"
 entrypoints = "==0.4"
 evidently = "==0.4.4"
