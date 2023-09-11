@@ -66,20 +66,17 @@ jobs:
       #   working-directory: "./"
       #   run: poetry run pylint --recursive=y .
 
-      - name: install dvc
-        uses: iterative/setup-dvc@v1
+      # - name: install dvc
+      #   uses: iterative/setup-dvc@v1
 
       - name: Pull data and 
-        run: dvc pull
+        run: pipenv run dvc pull
 
       - name: Unit test
-        run: dvc exp run test
+        run: pipenv run dvc exp run test
 
       - name: Evaluate model
-        env:
-          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-        run: dvc exp run evaluate
+        run: pipenv run dvc exp run evaluate
 
       - name: Iterative CML setup
         uses: iterative/setup-cml@v1
