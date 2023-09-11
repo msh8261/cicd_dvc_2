@@ -66,8 +66,8 @@ jobs:
       #   working-directory: "./"
       #   run: poetry run pylint --recursive=y .
 
-      # - name: install dvc
-      #   uses: iterative/setup-dvc@v1
+      - name: install dvc
+        uses: iterative/setup-dvc@v1
 
       - name: Pull data and 
         run: dvc pull
