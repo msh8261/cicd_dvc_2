@@ -12,8 +12,6 @@ stages:
   evaluate:
     cmd: python ml/evaluate.py
     deps:
-      - model
-      - data/dst
       - ml/evaluate.py
     metrics:
       - dvclive/metrics.json

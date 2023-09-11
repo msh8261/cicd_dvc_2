@@ -87,6 +87,9 @@ jobs:
       - name: Pull data and 
         run: dvc pull
 
+      - name: Unit test
+        run: dvc exp run test
+
       - name: Evaluate model
         run: dvc exp run evaluate
 
