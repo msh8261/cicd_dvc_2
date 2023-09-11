@@ -41,8 +41,6 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/application/requirements.txt') }}
-          restore-keys: ${{ runner.os }}-pip-
 
       #----------------------------------------------
       # install your root project, if required
