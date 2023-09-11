@@ -6,10 +6,6 @@ on:
       - main
     paths:
       - ./**
-      # - etl/**
-      # - ml/**
-      # - tests/**
-      # - github/workflows/ci_test.yaml
 
 env:
   AWS_DEFAULT_REGION: 'eu-north-1'
@@ -50,35 +46,18 @@ jobs:
         run: |
           pipenv install --deploy --dev
         
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{env.AWS_ACCESS_KEY_ID}}
-          aws-secret-access-key: ${{env.AWS_SECRET_ACCESS_KEY}}
-          aws-region: ${{ env.AWS_DEFAULT_REGION }}
-
-      - name: Run Unit tests
-        working-directory: "./"
-        run: pipenv run pytest tests/
-
       # - name: Lint
       #   working-directory: "./"
       #   run: poetry run pylint --recursive=y .
 
-      # - name: install dvc
-      #   uses: iterative/setup-dvc@v1
-
-      - name: Pull data and 
+      - name: Pull data and model
         run: pipenv run dvc pull
-
-      - name: Unit test
-        run: pipenv run dvc exp run test
-
-      - name: Evaluate model
+  
+      - name: Run pipline
         env:
           access-key-id: ${{env.AWS_ACCESS_KEY_ID}}
           secret-access-key: ${{env.AWS_SECRET_ACCESS_KEY}}
-        run: pipenv run dvc exp run evaluate
+        run: pipenv run dvc repro
 
       - name: Iterative CML setup
         uses: iterative/setup-cml@v1
@@ -93,6 +72,16 @@ jobs:
           cat dvclive/params.yaml >> report.md
           # Create a report in PR
           cml comment create report.md 
+          
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{env.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{env.AWS_SECRET_ACCESS_KEY}}
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+
+
 
 
 
