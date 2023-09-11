@@ -30,6 +30,7 @@ jobs:
       #----------------------------------------------
       - name: Check out repository
         uses: actions/checkout@v3
+
       - name: Set up python
         id: setup-python
         uses: actions/setup-python@v4
@@ -49,7 +50,6 @@ jobs:
         if: steps.cache-pipenv.outputs.cache-hit != 'true'
         run: |
           pipenv install --deploy --dev
-
         
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -66,8 +66,9 @@ jobs:
       #   working-directory: "./"
       #   run: poetry run pylint --recursive=y .
 
-      - name: instal dvc
-        uses: iterative/setup-dvc@v1
+      # - name: install dvc
+      #   uses: iterative/setup-dvc@v1
+
       - name: Pull data and 
         run: dvc pull
 

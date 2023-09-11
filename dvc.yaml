@@ -18,7 +18,7 @@ stages:
   monitoring:
     cmd: python vis/monitoring.py
   test:
-    cmd: poetry run pytest tests/
+    cmd: pytest tests/
 
 
 
