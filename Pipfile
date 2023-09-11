@@ -155,7 +155,6 @@ python-dateutil = "==2.8.2"
 python-slugify = "==8.0.1"
 pytz = "==2023.3.post1"
 pytzdata = "==2020.1"
-pywin32 = "==306"
 pyyaml = "==6.0.1"
 querystring-parser = "==1.2.4"
 ray = "==2.6.3"
@@ -212,6 +211,7 @@ wrapt = "==1.15.0"
 yarl = "==1.9.2"
 zc-lockfile = "==3.0.post1"
 zipp = "==3.16.2"
+pypiwin32 = "*"
 
 [dev-packages]
 
