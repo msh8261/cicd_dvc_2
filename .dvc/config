@@ -1,6 +1,2 @@
-[core]
-    remote = myremote
 ['remote "myremote"']
     url = s3://bucket1-aws-2023
-    access_key_id = AKIASC7NYEP7MPSXYHYT
-    secret_access_key = 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
