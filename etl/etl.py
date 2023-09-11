@@ -20,7 +20,7 @@ nltk.download('stopwords')
 # You have to download stopwords Package to execute this command
 from nltk.corpus import stopwords
 
-from s3.s3_bucket import read_s3_file, upload_to_aws
+from cl.s3_bucket import read_s3_file, upload_to_aws
 
 with initialize(version_base=None, config_path="../config"):
     config = compose(config_name="main", overrides=["etl=etl1"])    

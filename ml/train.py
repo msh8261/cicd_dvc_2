@@ -17,7 +17,7 @@ from omegaconf import DictConfig
 from prefect import task, flow, get_run_logger
 from prefect.task_runners import SequentialTaskRunner
 
-from s3.s3_bucket import read_s3_file, upload_to_aws
+from cl.s3_bucket import read_s3_file, upload_to_aws
 
 
 with initialize(version_base=None, config_path="../config"):
